@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.play.sms.ray.mapper.RayCommonlyMessageMapper">
+    <resultMap id="BaseResultMap" type="com.tan.play.sms.ray.entity.RayCommonlyMessage">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="message_id" jdbcType="VARCHAR" property="messageId"/>
+        <result column="user_message_id" jdbcType="VARCHAR" property="userMessageId"/>
+        <result column="message_push_content" jdbcType="VARCHAR" property="messagePushContent"/>
+        <result column="message_state" jdbcType="VARCHAR" property="messageState"/>
+        <result column="message_createtime" jdbcType="VARCHAR" property="messageCreatetime"/>
+        <result column="message_updatetime" jdbcType="VARCHAR" property="messageUpdatetime"/>
+    </resultMap>
+</mapper>

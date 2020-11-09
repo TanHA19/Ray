@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.play.sms.ray.mapper.RayAccountAssetsMapper">
+    <resultMap id="BaseResultMap" type="com.tan.play.sms.ray.entity.RayAccountAssets">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="account_id" jdbcType="VARCHAR" property="accountId"/>
+        <result column="account_user_id" jdbcType="VARCHAR" property="accountUserId"/>
+        <result column="account_status" jdbcType="VARCHAR" property="accountStatus"/>
+        <result column="account_pay_way" jdbcType="VARCHAR" property="accountPayWay"/>
+        <result column="account_assets_subtype" jdbcType="VARCHAR" property="accountAssetsSubtype"/>
+        <result column="account_fundbal_total" jdbcType="INTEGER" property="accountFundbalTotal"/>
+        <result column="account_balance_amt" jdbcType="INTEGER" property="accountBalanceAmt"/>
+        <result column="account_userid" jdbcType="VARCHAR" property="accountUserid"/>
+        <result column="account_ctime" jdbcType="VARCHAR" property="accountCtime"/>
+        <result column="account_utime" jdbcType="VARCHAR" property="accountUtime"/>
+        <result column="account_month" jdbcType="INTEGER" property="accountMonth"/>
+        <result column="account_month_begintime" jdbcType="VARCHAR" property="accountMonthBegintime"/>
+        <result column="account_month_endtime" jdbcType="VARCHAR" property="accountMonthEndtime"/>
+    </resultMap>
+</mapper>

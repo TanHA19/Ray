@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.play.sms.ray.mapper.RayMessageOperateLogMapper">
+  <resultMap id="BaseResultMap" type="com.tan.play.sms.ray.entity.RayMessageOperateLog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="message_type" jdbcType="VARCHAR" property="messageType" />
+    <result column="message_batch" jdbcType="VARCHAR" property="messageBatch" />
+    <result column="message_fail_reason" jdbcType="VARCHAR" property="messageFailReason" />
+    <result column="result_flag" jdbcType="VARCHAR" property="resultFlag" />
+    <result column="fail_reason_code" jdbcType="VARCHAR" property="failReasonCode" />
+    <result column="fail_reason" jdbcType="VARCHAR" property="failReason" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="message_phone_content" jdbcType="LONGVARCHAR" property="messagePhoneContent" />
+    <result column="message_content" jdbcType="LONGVARCHAR" property="messageContent" />
+  </resultMap>
+</mapper>

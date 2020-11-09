@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>商务短信平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+    <!-- third party css -->
+    <link th:href="@{/assets/css/vendor/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/vendor/responsive.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/vendor/buttons.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/vendor/select.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <!-- third party css end -->
+
+    <!-- App css -->
+    <link th:href="@{/assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+<header th:replace="commons/index :: commonBar"></header>
+<!--Topbar end-->
+
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <header th:replace="commons/index :: commonHeader"></header>
+        <!-- Left Sidebar End -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">首页</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">账号管理</a></li>
+                                    <li class="breadcrumb-item active">最近一次充值记录</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">最近一次充值记录</h4>
+                        </div> <!-- end page-title-box -->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row" style="margin-bottom: 5%">
+                                    <div class="col-lg-6">
+                                        <form id="myForm" th:action="@{/accountAssets/get}">
+
+                                            <div class="row">
+
+
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="dataTables_filter">
+                                                        <input class="form-control" id="accountCtimeS"
+                                                               name="accountCtimeS" type="date" placeholder="时间开始"
+                                                               th:value="${accountCtimeS}">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="dataTables_filter">
+                                                        <input class="form-control" id="accountCtimeE"
+                                                               name="accountCtimeE" type="date" placeholder="时间结束"
+                                                               th:value="${accountCtimeE}">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-6">
+
+                                                    <select
+                                                            class="form-control form-white" data-placeholder="充值方式"
+                                                            id="payWay" name="payWay" th:value="@{rechargePayWay}"
+                                                    >
+
+                                                        <option th:value="${dictEntry.dictCode}"
+                                                                th:each="dictEntry:${payWayList}"
+                                                                th:text=${dictEntry.dictName}></option>
+
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="dataTables_filter">
+                                                        <button type="submit" class="btn btn-primary"
+                                                                style="margin-left: 10px">查找
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary"
+                                                                style="margin-left: 10px"
+                                                                onclick="clearAccountAssets()">清空
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </form>
+
+                                    </div> <!-- end col -->
+
+
+                                </div>
+
+                                <table class="table table-centered mb-0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>充值账号用户</th>
+                                        <th>支付方式</th>
+                                        <th>总充值金额</th>
+                                        <th>余额</th>
+                                        <th>充值月份</th>
+                                        <th>充值到期时间</th>
+                                        <th>创建时间</th>
+                                        <th>数据状态</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="prod: ${pageResult.content}">
+                                        <td th:text="${prod.username}"></td>
+                                        <td th:text="${prod.accountPayWay}"></td>
+                                        <td th:text="${prod.accountFundbalTotal/100}+'元'"></td>
+                                        <td th:text="${prod.accountBalanceAmt/100}+'元'"></td>
+                                        <td th:text="${prod.accountMonth}"></td>
+                                        <td th:text="${prod.accountMonthEndtime}"></td>
+                                        <td th:text="${prod.accountCtime}"></td>
+                                        <td th:if="${prod.accountStatus=='0'}">正常</td>
+                                        <td th:if="${prod.accountStatus=='1'}">冻结</td>
+                                        <td th:if="${prod.accountStatus=='2'}">注销</td>
+
+                                    </tr>
+
+                                    </tbody>
+
+                                    </tbody>
+                                </table>
+
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+
+                    <!-- 分页 start-->
+                    <div class="text-right">
+                        <div class="text-right">
+                            <nav aria-label="Page navigation example"
+                                 th:if="${pageResult.totalPages>0}">
+                                <ul class="pagination float-right">
+                                    <li th:class="|page-item |"><a class="page-link" href="#"
+                                                                   th:if="${pageResult.pageNum>1}"
+                                                                   th:onclick="getAccountAssets(1,[[${pageResult.pageSize}]])">首页</a>
+                                    </li>
+                                    <li th:class="|page-item ${pageResult.pageNum==1?'disabled':''}|">
+                                        <a class="page-link" href="#" th:if="${pageResult.pageNum>1}"
+                                           th:onclick="getAccountAssets([[${pageResult.pageNum-1}]],[[${pageResult.pageSize}]])">上一页</a>
+                                    </li>
+
+                                    <li th:class="|page-item active|"><span class="page-link"
+                                                                            th:text="${pageResult.pageNum}"></span></li>
+                                    <li th:class="|page-item |"><a class="page-link" href="#"
+                                                                   th:if="${pageResult.pageNum<pageResult.totalPages}"
+                                                                   th:onclick="getAccountAssets([[${pageResult.pageNum+1}]],[[${pageResult.pageSize}]])">下一页</a>
+                                    </li>
+                                    <li th:class="|page-item |"><a class="page-link" href="#"
+                                                                   th:if="${pageResult.pageNum<pageResult.totalPages}"
+                                                                   th:onclick="getAccountAssets([[${pageResult.totalPages}]],[[${pageResult.pageSize}]])">尾页</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <!-- 分页 end-->
+                        </div>
+
+                    </div>
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <footer th:replace="commons/index :: commonFooter"></footer>
+                <!-- end Footer -->
+            </div> <!-- content-page -->
+
+        </div> <!-- end wrapper-->
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+    </div>
+</div>
+<!-- END Container -->
+
+
+<!-- App js -->
+<script th:src="@{/assets/js/app.min.js}"></script>
+
+<!-- third party js -->
+<script th:src="@{/assets/js/vendor/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.responsive.min.js}"></script>
+<script th:src="@{/assets/js/vendor/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.buttons.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.html5.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.flash.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.print.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.keyTable.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.select.min.js}"></script>
+<!-- third party js ends -->
+
+<!-- demo app -->
+<script th:src="@{/assets/js/pages/demo.datatable-init.js}"></script>
+<script th:src="@{/assets/js/commons/index.js}"></script>
+<!-- end demo js-->
+<script type="text/javascript">
+
+
+    let baseUrl = "/accountAssets/"
+
+    function getAccountAssets(pageNum, pageSize) {
+        event.preventDefault()
+        let accountCtimeS = $("#accountCtimeS").val();
+        let accountCtimeE = $("#accountCtimeE").val();
+        let payWay = $("#payWay").val();
+
+        window.location = baseUrl + "get?pageNum=" + pageNum + "&pageSize=" + pageSize + "&accountCtimeS=" + accountCtimeS + "&accountCtimeE=" + accountCtimeE + "&payWay=" + payWay
+    }
+
+
+    function clearAccountAssets() {
+        event.preventDefault();
+        $("#myForm")[0].reset();
+    }
+
+</script>
+
+</body>
+
+</html>

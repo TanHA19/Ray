@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>商务短信平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <base href="/">
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- third party css -->
+    <link th:href="@{assets/css/vendor/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{assets/css/vendor/responsive.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{assets/css/vendor/buttons.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{assets/css/vendor/select.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <!-- third party css end -->
+
+    <!-- App css -->
+    <link th:href="@{assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{assets/css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+<header th:replace="commons/index :: commonBar"></header>
+<!--Topbar end-->
+
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <header th:replace="commons/index :: commonHeader"></header>
+        <!-- Left Sidebar End -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">首页</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">短信状态</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">定时短信</a></li>
+                                    <li class="breadcrumb-item active">已发详情</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">已发详情</h4>
+                        </div> <!-- end page-title-box -->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row" style="margin-bottom: 5%">
+                                    <div class="col-lg-6">
+                                        <form id="myForm" th:action="@{/operateLog/get}">
+
+                                            <div class="row">
+                                                <div class="form-group mx-sm-3 mb-2">
+                                                    <label for="createTimeS" class="mr-2">发送创建开始时间</label> <input
+                                                        class="form-control" id="createTimeS" type="date"
+                                                        name="createTimeS" th:value="${createTimeS}"/>
+                                                </div>
+                                                <div class="form-group mx-sm-3 mb-2">
+                                                    <label for="createTimeE" class="mr-2">发送创建结束时间</label> <input
+                                                        class="form-control" id="createTimeE" type="date"
+                                                        name="createTimeE" th:value="${createTimeE}"/>
+
+                                                </div>
+
+
+                                                <div class="form-group mx-sm-3 mb-2">
+                                                    <button type="submit" class="btn btn-primary"
+                                                            style="margin-left: 10px">模糊查找
+                                                    </button>
+                                                    <button onclick="clearMessage()" class="btn btn-primary"
+                                                            style="margin-left: 10px">清空
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                        </form>
+                                    </div> <!-- end col -->
+                                </div>
+
+                                <table class="table table-centered mb-0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>用户名</th>
+
+                                        <th>请求批次号</th>
+                                        <th>发送手机号码</th>
+                                        <th>发送状态</th>
+                                        <th>失败原因</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="prod: ${pageResult.content}">
+                                        <td th:text="${prod.userName}"></td>
+
+                                        <td th:text="${prod.messageBatch}"></td>
+                                        <td th:text="${prod.messagePhoneContent}"></td>
+                                        <td th:text="${prod.resultFlag=='0'?'成功':'失败'}"></td>
+                                        <td th:text="${prod.failReason}"></td>
+                                        <td th:text="${prod.createTime}"></td>
+                                        <td>
+
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                    th:onclick="deleteOperateLog([[${prod}]])"
+                                                    th:if="${#strings.equals(session.userId,session.admin)}">删除
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                    th:onclick="toOperateLog([[${prod.messageContent}]])">发送详情
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+
+                                    </tbody>
+                                </table>
+
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+                    <!-- 分页 start-->
+                    <div class="text-right">
+                        <nav aria-label="Page navigation example"
+                             th:if="${pageResult.totalPages>0}">
+                            <ul class="pagination float-right">
+                                <li th:class="|page-item |"><a class="page-link" href="#"
+                                                               th:if="${pageResult.pageNum>1}"
+                                                               th:onclick="getOperateLog(1,[[${pageResult.pageSize}]])">首页</a>
+                                </li>
+                                <li th:class="|page-item ${pageResult.pageNum==1?'disabled':''}|">
+                                    <a class="page-link" href="#" th:if="${pageResult.pageNum>1}"
+                                       th:onclick="getOperateLog([[${pageResult.pageNum-1}]],[[${pageResult.pageSize}]])">上一页</a>
+                                </li>
+
+                                <li th:class="|page-item active|"><span class="page-link"
+                                                                        th:text="${pageResult.pageNum}"></span></li>
+                                <li th:class="|page-item |"><a class="page-link" href="#"
+                                                               th:if="${pageResult.pageNum<pageResult.totalPages}"
+                                                               th:onclick="getOperateLog([[${pageResult.pageNum+1}]],[[${pageResult.pageSize}]])">下一页</a>
+                                </li>
+                                <li th:class="|page-item |"><a class="page-link" href="#"
+                                                               th:if="${pageResult.pageNum<pageResult.totalPages}"
+                                                               th:onclick="getOperateLog([[${pageResult.totalPages}]],[[${pageResult.pageSize}]])">尾页</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- 分页 end-->
+                    </div>
+
+                </div>
+
+            </div> <!-- content -->
+
+            <!-- Footer Start -->
+            <footer th:replace="commons/index :: commonFooter"></footer>
+            <!-- end Footer -->
+        </div> <!-- content-page -->
+
+    </div> <!-- end wrapper-->
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END Container -->
+
+
+<div class="modal fade" id="event-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header pr-4 pl-4 border-bottom-0 d-block">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="divName">发送内容</h4>
+            </div>
+            <div class="modal-body pt-3 pr-4 pl-4">
+                <form id="myOperateLogForm" class="needs-validation" novalidate>
+                    <input id="id" hidden="hidden">
+                    <div class="mt-3">
+
+                        <textarea class="form-control" rows="6" id="messageContent"
+                                  placeholder="发送内容"></textarea>
+                    </div>
+
+                    <div class="mt-3">
+
+                        <button class="btn btn-light " data-dismiss="modal">取消</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+        <!-- end modal-content-->
+    </div>
+    <!-- end modal dialog-->
+</div>
+<!-- end modal-->
+
+
+<!-- App js -->
+<script src="assets/js/app.min.js"></script>
+
+<!-- third party js -->
+<script th:src="@{/assets/js/vendor/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.responsive.min.js}"></script>
+<script th:src="@{/assets/js/vendor/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.buttons.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.html5.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.flash.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.print.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.keyTable.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.select.min.js}"></script>
+<!-- third party js ends -->
+
+<!-- demo app -->
+<script th:src="@{/assets/js/pages/demo.datatable-init.js}"></script>
+<script th:src="@{/assets/js/commons/index.js}"></script>
+<!-- end demo js-->
+<script type="text/javascript">
+
+
+    const baseUrl = "/operateLog/"
+
+    // 常用短信
+    function getOperateLog(pageNum, pageSize) {
+        event.preventDefault()
+        let createTimeS = $("#createTimeS").val();
+        let createTimeE = $("#createTimeE").val();
+
+        window.location = baseUrl + "get?pageNum=" + pageNum + "&pageSize=" + pageSize + "&createTimeS=" + createTimeS + "&createTimeE=" + createTimeE
+    }
+
+
+    function toOperateLog(messageContent) {
+        $("#event-modal").modal("show");
+        $("#messageContent").val(messageContent);
+    }
+
+    function deleteOperateLog(pord) {
+        let url = baseUrl + "delete"
+        if (confirm("确定删除 " + pord.userName + " 这一条内容吗?")) {
+            ajax(url, {"id": pord.id}, "DELETE").then(function (result) {
+                if (result.success == true) {
+                    alert("删除成功")
+                    window.location.reload()
+                } else {
+                    alert(result.errorMsg)
+                }
+
+            })
+        }
+
+    }
+    function clearMessage() {
+
+        event.preventDefault();
+        $("#myForm")[0].reset();
+    }
+
+</script>
+
+</body>
+
+</html>

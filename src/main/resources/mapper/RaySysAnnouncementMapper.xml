@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.play.sms.ray.mapper.RaySysAnnouncementMapper">
+    <resultMap id="BaseResultMap" type="com.tan.play.sms.ray.entity.RaySysAnnouncement">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="announcement_id" jdbcType="VARCHAR" property="announcementId"/>
+        <result column="announcement_title" jdbcType="VARCHAR" property="announcementTitle"/>
+        <result column="announcement_userId" jdbcType="VARCHAR" property="announcementUserid"/>
+        <result column="announcement_type" jdbcType="VARCHAR" property="announcementType"/>
+        <result column="announcement_publish_time" jdbcType="VARCHAR" property="announcementPublishTime"/>
+        <result column="announcement_state" jdbcType="VARCHAR" property="announcementState"/>
+        <result column="announcement_create_time" jdbcType="VARCHAR" property="announcementCreateTime"/>
+        <result column="announcement_update_time" jdbcType="VARCHAR" property="announcementUpdateTime"/>
+        <result column="announcement_update_user" jdbcType="VARCHAR" property="announcementUpdateUser"/>
+        <result column="announcement_content" jdbcType="LONGVARCHAR" property="announcementContent"/>
+    </resultMap>
+</mapper>

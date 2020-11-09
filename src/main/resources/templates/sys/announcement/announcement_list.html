@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>商务短信平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+    <!-- third party css -->
+    <link th:href="@{/assets/css/vendor/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/vendor/responsive.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/vendor/buttons.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/vendor/select.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <!-- third party css end -->
+
+    <!-- App css -->
+    <link th:href="@{/assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+<header th:replace="commons/index :: commonBar"></header>
+<!--Topbar end-->
+
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <header th:replace="commons/index :: commonHeader"></header>
+        <!-- Left Sidebar End -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">首页</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">系统</a></li>
+                                    <li class="breadcrumb-item active">系统公告</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">系统公告</h4>
+                        </div> <!-- end page-title-box -->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="header-title">商务短信平台 公告栏</h4>
+                                <p class="text-muted font-14 mb-4">
+                                    使用本系统前，请各位用户仔细查看公告栏信息，如有疑问请联系管理人员！！！
+                                </p>
+                                <div class="row" style="margin-bottom: 5%">
+                                    <div class="col-lg-6">
+<!--                                        <form id="myForm" th:action="@{/sys/announcement/get}">-->
+
+<!--                                            <div class="row">-->
+
+
+<!--                                                <div class="col-sm-12 col-md-6">-->
+<!--                                                    <div class="dataTables_filter">-->
+<!--                                                        <input class="form-control" id="announcementPublishTimeS"-->
+<!--                                                               name="announcementPublishTimeS" type="date"-->
+<!--                                                               placeholder="发布时间开始"-->
+<!--                                                               th:value="${announcementPublishTimeS}">-->
+
+<!--                                                    </div>-->
+<!--                                                </div>-->
+
+<!--                                                <div class="col-sm-12 col-md-6">-->
+<!--                                                    <div class="dataTables_filter">-->
+<!--                                                        <input class="form-control" id="announcementPublishTimeE"-->
+<!--                                                               name="announcementPublishTimeE" type="date"-->
+<!--                                                               placeholder="发布时间结束"-->
+<!--                                                               th:value="${announcementPublishTimeE}">-->
+
+<!--                                                    </div>-->
+<!--                                                </div>-->
+
+<!--                                                <div class="col-sm-12 col-md-6">-->
+<!--                                                    <div class="dataTables_filter">-->
+<!--                                                        <input type="" class="form-control" name="announcementTitle"-->
+<!--                                                               aria-controls="products-datatable" placeholder="请输入标题"-->
+<!--                                                               th:value="${announcementTitle}">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+
+
+<!--                                                <div class="col-sm-12 col-md-6">-->
+<!--                                                    <div class="dataTables_filter">-->
+<!--                                                        <button type="submit" class="btn btn-primary"-->
+<!--                                                                style="margin-left: 10px">查找-->
+<!--                                                        </button>-->
+<!--                                                        <button type="button" class="btn btn-primary"-->
+<!--                                                                style="margin-left: 10px"-->
+<!--                                                                th:if="${#strings.equals(session.userId,session.admin)}"-->
+<!--                                                                onclick="toAnnouncement('')">添加-->
+<!--                                                        </button>-->
+<!--                                                        <button type="button" class="btn btn-primary"-->
+<!--                                                                style="margin-left: 10px" onclick="clearAnnouncement()">-->
+<!--                                                            清空-->
+<!--                                                        </button>-->
+
+<!--                                                    </div>-->
+<!--                                                </div>-->
+
+
+<!--                                            </div>-->
+
+
+<!--                                        </form>-->
+
+                                        <button type="button" class="btn btn-primary"
+                                            style="margin-left: 10px"
+                                            th:if="${#strings.equals(session.userId,session.admin)}"
+                                            onclick="toAnnouncement('')">添加 </button>
+
+                                    </div> <!-- end col -->
+
+
+                                </div>
+
+                                <table class="table table-centered mb-0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>标题</th>
+                                        <th>内容</th>
+                                        <th>类型</th>
+                                        <th>发布时间</th>
+                                        <th th:if="${#strings.equals(session.userId,session.admin)}">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="prod: ${pageResult.content}">
+                                        <td th:text="${prod.announcementTitle}"></td>
+                                        <td th:text="${prod.announcementContent}"></td>
+                                        <td th:text="${prod.announcementType =='1'?'普通公告':'系统公告'}"></td>
+                                        <td th:text="${prod.announcementPublishTime}"></td>
+
+
+                                        <td>
+
+                                            <button type="button" class="btn btn-success btn-sm"
+                                                    th:onclick="deleteAnnouncement([[${prod}]])"
+                                                    th:if="${#strings.equals(session.userId,session.admin)}">删除公告
+                                            </button>
+                                            <button type="button" class="btn btn-success btn-sm"
+                                                    th:onclick="toAnnouncement([[${prod}]])"
+                                                    th:if="${#strings.equals(session.userId,session.admin)}">修改公告
+                                            </button>
+
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+
+                                    </tbody>
+                                </table>
+
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+
+                    <!-- 分页 start-->
+                    <div class="text-right">
+                        <nav aria-label="Page navigation example"
+                             th:if="${pageResult.totalPages>0}">
+                            <ul class="pagination float-right">
+                                <li th:class="|page-item |"><a class="page-link" href="#"
+                                                               th:if="${pageResult.pageNum>1}"
+                                                               th:onclick="getAnnouncement(1,[[${pageResult.pageSize}]])">首页</a>
+                                </li>
+                                <li th:class="|page-item ${pageResult.pageNum==1?'disabled':''}|">
+                                    <a class="page-link" href="#" th:if="${pageResult.pageNum>1}"
+                                       th:onclick="getAnnouncement([[${pageResult.pageNum-1}]],[[${pageResult.pageSize}]])">上一页</a>
+                                </li>
+
+                                <li th:class="|page-item active|"><span class="page-link"
+                                                                        th:text="${pageResult.pageNum}"></span></li>
+                                <li th:class="|page-item |"><a class="page-link" href="#"
+                                                               th:if="${pageResult.pageNum<pageResult.totalPages}"
+                                                               th:onclick="getAnnouncement([[${pageResult.pageNum+1}]],[[${pageResult.pageSize}]])">下一页</a>
+                                </li>
+                                <li th:class="|page-item |"><a class="page-link" href="#"
+                                                               th:if="${pageResult.pageNum<pageResult.totalPages}"
+                                                               th:onclick="getAnnouncement([[${pageResult.totalPages}]],[[${pageResult.pageSize}]])">尾页</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- 分页 end-->
+                    </div>
+
+                </div>
+
+            </div> <!-- content -->
+
+            <!-- Footer Start -->
+            <footer th:replace="commons/index :: commonFooter"></footer>
+            <!-- end Footer -->
+        </div> <!-- content-page -->
+
+    </div> <!-- end wrapper-->
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END Container -->
+<!-- DIV -->
+<div class="modal fade" id="event-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="NewTaskModalLabel">公告</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <!--modal-body begin-->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- begin card -->
+                        <div class="card">
+                            <!-- begin card body-->
+                            <div class="card-body">
+                                <div class="modal-body pt-3 pr-4 pl-4">
+                                    <form id="addMyForm" class="needs-validation" novalidate>
+                                        <input class="form-control form-white" type="hidden" name="announcementId"
+                                               id="announcementId"/>
+                                        <div class="mt-3">
+                                            <label for="announcementTitle">公告标题</label>
+                                            <input type="text" id="announcementTitle" class="form-control"
+                                                   name="announcementTitle" placeholder="请输入标题">
+                                        </div>
+                                        <div class="mt-3">
+                                            <label for="announcementContent">公告内容 </label>
+                                            <textarea class="form-control" id="announcementContent" rows="6"
+                                                      name="announcementContent"
+                                                      placeholder="请输入内容"></textarea>
+                                        </div>
+
+                                        <div class="mt-3">
+
+                                            <button class="btn btn-light " data-dismiss="modal">取消</button>
+                                            <button type="button" class="btn btn-success" style="margin-left: 10px"
+                                                    th:onclick="addAnnouncement()">确定
+                                            </button>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+
+
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+
+                    </div><!-- end col-->
+
+
+                </div>
+            </div>
+
+            <!-- end modal-content-->
+        </div>
+
+    </div>
+    <!-- end modal dialog-->
+</div>
+</div>
+<!-- end modal-->
+
+
+<!-- App js -->
+<script th:src="@{/assets/js/app.min.js}"></script>
+
+<!-- third party js -->
+<script th:src="@{/assets/js/vendor/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.responsive.min.js}"></script>
+<script th:src="@{/assets/js/vendor/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.buttons.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.html5.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.flash.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.print.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.keyTable.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.select.min.js}"></script>
+<!-- third party js ends -->
+
+<!-- demo app -->
+<script th:src="@{/assets/js/pages/demo.datatable-init.js}"></script>
+<script th:src="@{/assets/js/commons/index.js}"></script>
+<!-- end demo js-->
+<script type="text/javascript">
+
+
+    let baseUrl = "/sys/announcement/"
+
+    function getAnnouncement(pageNum, pageSize) {
+        let announcementPublishTimeS = $("#announcementPublishTimeS").val();
+        let announcementPublishTimeE = $("#announcementPublishTimeE").val();
+        let announcementTitle = $("#announcementTitle").val();
+        event.preventDefault()
+
+        window.location = baseUrl + "get?pageNum=" + pageNum + "&pageSize=" + pageSize + "&announcementPublishTimeS=" + announcementPublishTimeS +
+            "&announcementPublishTimeE=" + announcementPublishTimeE + "&announcementTitle=" + announcementTitle
+    }
+
+    function toAnnouncement(prod) {
+
+        event.preventDefault()
+        $("#event-modal").modal("show");
+        if (prod != null && prod != "" && prod != undefined) {
+            $("#announcementId").val(prod.announcementId);
+            $("#announcementTitle").val(prod.announcementTitle);
+            $("#announcementContent").val(prod.announcementContent);
+
+        }
+
+
+    }
+
+    function addAnnouncement() {
+        ajax("/sys/announcement/add", $('#addMyForm').serialize(), 'POST').then(
+            function (res) {
+                if (res.success == true) {
+                    alert(res.errorMsg)
+                    window.location.href = "/sys/announcement/get";
+                } else {
+                    alert(res.errorMsg)
+                }
+            }
+        )
+    }
+
+
+    function deleteAnnouncement(prod) {
+        if (confirm("确定要删除标题为 " + prod.announcementTitle + " 公告吗？")) {
+            ajax("/sys/announcement/delete", {'announcementId': prod.announcementId}, 'POST').then(
+                function (res) {
+                    if (res.success == true) {
+                        alert(res.errorMsg)
+                        window.location.href = "/sys/announcement/get";
+                    } else {
+                        alert(res.errorMsg)
+                    }
+                }
+            )
+        }
+    }
+
+    function clearAnnouncement() {
+        event.preventDefault();
+        $("#myForm")[0].reset();
+    }
+</script>
+
+</body>
+
+</html>

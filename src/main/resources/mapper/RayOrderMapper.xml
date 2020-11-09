@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.play.sms.ray.mapper.RayOrderMapper">
+    <resultMap id="BaseResultMap" type="com.tan.play.sms.ray.entity.RayOrder">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ORDER_ID" jdbcType="VARCHAR" property="orderId"/>
+        <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode"/>
+        <result column="ORDER_TYPE" jdbcType="VARCHAR" property="orderType"/>
+        <result column="ORDER_CTIME" jdbcType="VARCHAR" property="orderCtime"/>
+        <result column="ORDER_TOTALPRICE" jdbcType="INTEGER" property="orderTotalprice"/>
+        <result column="ORDER_PRICE" jdbcType="INTEGER" property="orderPrice"/>
+        <result column="ORDER_COUPON" jdbcType="INTEGER" property="orderCoupon"/>
+        <result column="ORDER_POST_PAID" jdbcType="INTEGER" property="orderPostPaid"/>
+        <result column="ORDER_USERID" jdbcType="VARCHAR" property="orderUserid"/>
+        <result column="ORDER_FLAG" jdbcType="VARCHAR" property="orderFlag"/>
+        <result column="ORDER_PAYTYPE" jdbcType="VARCHAR" property="orderPaytype"/>
+        <result column="ORDER_PAYTIME" jdbcType="VARCHAR" property="orderPaytime"/>
+    </resultMap>
+</mapper>

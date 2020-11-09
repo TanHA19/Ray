@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>商务短信平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
+
+    <!-- App css -->
+    <link th:href="@{/assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+<header th:replace="commons/index :: commonBar"></header>
+<!--Topbar end-->
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+        <!-- ========== Left Sidebar Start ========== -->
+        <header th:replace="commons/index :: commonHeader"></header>
+        <!-- Left Sidebar End -->
+        <div class="content-page">
+            <div class="content">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">账户信息</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">账户信息</a></li>
+                                    <li class="breadcrumb-item active">个人</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">个人</h4>
+                        </div> <!-- end page-title-box -->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Profile -->
+                        <div class="card bg-primary">
+                            <div class="card-body profile-user-box">
+
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="media">
+                                            <span class="float-left m-2 mr-4"><img
+                                                    th:src="@{/assets/images/users/avatar-2.jpg}" style="height: 100px;"
+                                                    alt="" class="rounded-circle img-thumbnail"></span>
+                                            <div class="media-body">
+
+                                                <h4 class="mt-1 mb-1 text-white"
+                                                    th:text="${user.rayUserInfo.username}"></h4>
+                                                <p class="font-13 text-white-50"> Authorized brand customers </p>
+
+                                                <ul class="mb-0 list-inline text-light">
+                                                    <li class="list-inline-item mr-3">
+                                                        <h5 class="mb-1">总积分</h5>
+                                                        <p class="mb-0 font-13 text-white-50"
+                                                           th:text="${user.rayUserInfo.pointsTotalView}"></p>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <h5 class="mb-1">ID</h5>
+                                                        <p class="mb-0 font-13 text-white-50"
+                                                           th:text="${user.rayUserExtend.uid}"></p>
+                                                    </li>
+                                                </ul>
+                                            </div> <!-- end media-body-->
+                                        </div>
+                                    </div> <!-- end col-->
+
+                                    <div class="col-sm-4">
+                                        <div class="text-center mt-sm-0 mt-3 text-sm-right">
+                                            <button type="button" class="btn btn-light"
+                                                    th:onclick="toUpdate([[${user.rayUserInfo.id}]])">
+                                                <i class="mdi mdi-account-edit mr-1"></i> 修改密码
+                                            </button>
+                                        </div>
+                                    </div> <!-- end col-->
+                                </div> <!-- end row -->
+
+                            </div> <!-- end card-body/ profile-user-box-->
+                        </div><!--end profile/ card -->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end row -->
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Personal-Information -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mt-0 mb-3">用户信息</h4>
+                                <p class="text-muted font-13">
+                                    请保证信息的真实性
+                                </p>
+
+                                <hr>
+
+                                <div class="text-left">
+                                    <p class="text-muted"><strong>真实姓名 :</strong> <span class="ml-2"
+                                                                                        th:text="${user.rayUserInfo.username}"></span>
+                                    </p>
+
+                                    <p class="text-muted"><strong>手机号码 :</strong><span class="ml-2"
+                                                                                       th:text="${user.rayUserInfo.telnum}"></span>
+                                    </p>
+
+                                    <p class="text-muted"><strong>电子邮件 :</strong> <span class="ml-2"
+                                                                                        th:text="${user.rayUserInfo.email}">coderthemes@gmail.com</span>
+                                    </p>
+
+                                    <p class="text-muted"><strong>居住地址 :</strong> <span class="ml-2"
+                                                                                        th:text="${user.rayUserExtend.userAddress}"></span>
+                                    </p>
+
+                                    <p class="text-muted"><strong>回复同步地址 :</strong> <span class="ml-2"
+                                                                                          th:text="${user.rayUserExtend.userReplyAddress}"></span>
+                                    </p>
+                                    <p class="text-muted"><strong>状态同步地址 :</strong> <span class="ml-2"
+                                                                                          th:text="${user.rayUserExtend.userStatuAddress}"></span>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Personal-Information -->
+
+
+                        <!-- Toll free number box-->
+                        <div class="card text-white bg-info overflow-hidden">
+                            <div class="card-body">
+                                <div class="toll-free-box text-center">
+                                    <h4><i class="mdi mdi-deskphone"></i> <span
+                                            th:text="'平台客服联系方式：'+${adminUserPhone}"></span></h4>
+                                </div>
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                        <!-- End Toll free number box-->
+
+
+                    </div>
+                    <!-- end col -->
+
+                    <!-- 充值信息 -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title mt-0 mb-3">账号信息</h4>
+                            <p class="text-muted font-13">
+                                积分获取请联系平台客服 获取规则为 1积分/￥1
+                            </p>
+
+                            <hr>
+
+                            <div class="text-left">
+                                <p class="text-muted"><strong>总积分（元） :</strong> <span class="ml-2"
+                                                                                      th:text="${user.rayUserInfo.pointsTotalView}"></span>
+                                </p>
+
+                                <p class="text-muted"><strong>剩余积分 （元）:</strong><span class="ml-2"
+                                                                                      th:text="${user.rayUserInfo.pointsLeftView}"></span>
+                                </p>
+                                <p class="text-muted"><strong>最近一次登录时间:</strong><span class="ml-2"
+                                                                                      th:text=" ${#dates.format(user.rayLoginlog.lastDatetime,'yyyy-MM-dd hh:mm:ss')}"></span>
+                                </p>
+
+                                <p class="text-muted"><strong th:if="${user.rayAccountAssets !=null}"><span
+                                        th:text="'还剩:'+${user.rayAccountAssets.accountMonth}+'月过期'"></span></strong></p>
+                                <p class="text-muted"><strong th:if="${user.rayAccountAssets == null}">积分为0：请联系客服进行充值才可以正常发送短信哦！</strong>
+                                </p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 充值信息 -->
+
+                </div>
+                <!-- end row -->
+
+            </div>
+        </div> <!-- content-page -->
+
+    </div> <!-- end wrapper-->
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END Container -->
+
+
+<div class="modal fade" id="event-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header pr-4 pl-4 border-bottom-0 d-block">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="divName">修改个人信息</h4>
+            </div>
+            <div class="modal-body pt-3 pr-4 pl-4">
+                <form id="updateMyForm" class="needs-validation" novalidate>
+
+                    <input class="form-control form-white" type="hidden" name="id"
+                           id="id"/>
+
+
+                    <div class="form-group mb-3">
+                        <label for="oldPassword">原密码</label>
+                        <input type="password" id="oldPassword" class="form-control" name="oldPassword"
+                               placeholder="旧密码">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="newPassword">新密码</label>
+                        <input type="password" id="newPassword" name="newPassword" class="form-control"
+                               placeholder="新密码">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="newPassword1">确认密码</label>
+                        <input type="password" id="newPassword1" name="newPassword1" class="form-control"
+                               placeholder="确认密码">
+                    </div>
+
+                    <div class="mt-3">
+
+                        <button class="btn btn-light " data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-success" style="margin-left: 10px"
+                                th:onclick="updateUserPassWord([[${user.rayUserInfo.id}]])">修改密码
+                        </button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+        <!-- end modal-content-->
+    </div>
+    <!-- end modal dialog-->
+</div>
+<!-- end modal-->
+
+<!-- App js -->
+<script th:src="@{/assets/js/app.min.js}"></script>
+
+<!-- demo app -->
+<script th:src="@{/assets/js/pages/demo.profile.js}"></script>
+<script th:src="@{/assets/js/commons/index.js}"></script>
+<!-- end demo js-->
+<script>
+    function toUpdate(id) {
+        $("#event-modal").modal("show");
+        $("#id").val(id);
+    }
+
+    function updateUserPassWord(id) {
+        ajax("/user/update/password", $("#updateMyForm").serialize(), "POST").then(
+            function (res) {
+                debugger
+                if (res.success == true) {
+
+                    alert("修改成功,下次登录生效")
+                    window.location.reload()
+                } else {
+                    alert(res.errorMsg)
+                }
+            }
+        )
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.play.sms.ray.mapper.RayLoginlogMapper">
+    <resultMap id="BaseResultMap" type="com.tan.play.sms.ray.entity.RayLoginlog">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="login_type" jdbcType="VARCHAR" property="loginType"/>
+        <result column="login_pwd" jdbcType="VARCHAR" property="loginPwd"/>
+        <result column="fund_pwd" jdbcType="VARCHAR" property="fundPwd"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="QQ" jdbcType="VARCHAR" property="qq"/>
+        <result column="WEIXIN" jdbcType="VARCHAR" property="weixin"/>
+        <result column="user_session" jdbcType="VARCHAR" property="userSession"/>
+        <result column="session_vaild_dt" jdbcType="VARCHAR" property="sessionVaildDt"/>
+        <result column="login_tatal_ct" jdbcType="VARCHAR" property="loginTatalCt"/>
+        <result column="login_result" jdbcType="VARCHAR" property="loginResult"/>
+        <result column="last_datetime" jdbcType="TIMESTAMP" property="lastDatetime"/>
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="LNG" jdbcType="INTEGER" property="lng"/>
+        <result column="LAT" jdbcType="INTEGER" property="lat"/>
+        <result column="push_equip_type" jdbcType="VARCHAR" property="pushEquipType"/>
+        <result column="active_item" jdbcType="VARCHAR" property="activeItem"/>
+    </resultMap>
+</mapper>

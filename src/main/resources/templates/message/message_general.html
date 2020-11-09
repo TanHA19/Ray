@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>商务短信平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
+
+    <!-- App css -->
+    <link th:href="@{assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+<header th:replace="commons/index :: commonBar"></header>
+<!--Topbar end-->
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+        <header th:replace="commons/index :: commonHeader"></header>
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <div class="content-page">
+            <div class="content">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <form id="myFrom">
+                                            <!-- Add phone input-->
+                                            <div class="mt-3">
+                                                <label for="phoneNum">手机号码：(号码用英文逗号隔开,超过100万请用大容量短信)</label>
+                                                <textarea class="form-control" id="phoneNum" rows="6" name="phoneNumStr"
+                                                          placeholder="发送手机号，不能为空"></textarea>
+                                            </div>
+                                            <div class="mt-3" style="padding-left: 50%">
+                                                <input type="text"  hidden="hidden" name="messageType" value="01">
+
+                                                <div class="custom-file">
+                                                    <label class="custom-file-label" for="inputGroupFile04">TXT
+                                                        导入</label>
+                                                    <input type="file" class="custom-file-input" id="inputGroupFile04"
+                                                           onchange='openFile(event)'>
+
+                                                </div>
+                                            </div>
+                                            <div class="mt-3" style="padding-left: 50%">
+
+                                                <button type="button" class="btn btn-primary" style="margin-left: 10px"
+                                                        onclick="uniquePhone()">去除重复
+                                                </button>
+                                                <button type="button" class="btn btn-warning" style="margin-left: 10px"
+                                                        onclick="clearPhone('phoneNum')">清空号码
+                                                </button>
+                                            </div>
+                                            <div class="mt-3">
+                                                <label for="phoneContent">短信内容：(通道[70]字计费，长短信[67]字计费，已输入[<span
+                                                        id="textCount">0</span>]字，按[<span id="Count">0</span>]条计费)
+                                                </label>
+                                                <textarea class="form-control" id="phoneContent" rows="6"
+                                                          name="phoneContent"
+                                                          placeholder="发送短信内容，不能为空"></textarea>
+                                            </div>
+
+                                            <div class="mt-3" style="padding-left: 62%">
+
+                                                <button type="button" class="btn btn-primary" style="margin-left: 10px"
+                                                        onclick="show()">常用短语
+                                                </button>
+                                                <button type="button" class="btn btn-warning" style="margin-left: 10px"
+                                                        onclick="clearPhone('phoneContent')">清空内容
+                                                </button>
+                                            </div>
+
+                                            <div class="mt-3">
+
+                                                <div class="col-sm-4">
+                                                    <label for="sendSelect">发送方式</label>
+                                                    <select class="form-control" id="sendSelect" name="sendWay">
+                                                        <option value="0">简单发送</option>
+                                                        <option value="1">详细发送</option>
+
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <label for="sendTimeSelect">发送时间</label>
+                                                    <select class="form-control" id="sendTimeSelect"
+                                                            onchange="changeShowTime()" name="sendTime">
+                                                        <option value="2">立即发送</option>
+                                                        <option value="3">定时发送</option>
+
+                                                    </select>
+
+                                                    <div class="mt-3" style="display: none;" id="dingshi">
+                                                        <input type="text" class="form-control" data-toggle="input-mask"
+                                                               data-mask-format="00/00/0000 00:00:00" maxlength="19"
+                                                               name="sendTimeTask">
+                                                        <span class="font-13 text-muted">输入格式 "DD/MM/YYYY HH:MM:SS"</span>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary mb-2"
+                                                        style="margin-left: 80%" onclick="sendMessage()">发送消息
+                                                </button>
+
+
+                                            </div>
+
+
+                                        </form>
+
+
+                                        <div class="alert alert-warning mt-3" role="alert">
+
+                                            PS：发送方式不会影响发送，只是详细发送比简易发送在发送过程中显示数据会更加详细！
+                                        </div>
+
+
+                                    </div>
+
+                                </div> <!-- end row -->
+
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+            </div> <!-- content -->
+
+
+        </div> <!-- content-page -->
+        <!-- Footer Start -->
+        <footer th:replace="commons/index :: commonFooter"></footer>
+        <!-- end Footer -->
+
+    </div> <!-- end wrapper-->
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END Container -->
+
+
+<!-- DIV -->
+<div class="modal fade" id="event-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="NewTaskModalLabel">常用短信</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <!--modal-body begin-->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- begin card -->
+                        <div class="card">
+                            <!-- begin card body-->
+                            <div class="card-body">
+
+                                <table id="basic-datatable" class="table dt-responsive nowrap" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>内容</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="prod: ${pageResult.content}">
+                                        <td th:text="${prod.messagePushContent}"></td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-sm"
+                                                    th:onclick="onclickText([[${prod}]])">选择内容
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+
+                    </div><!-- end col-->
+
+
+                </div>
+            </div>
+
+            <!-- end modal-content-->
+        </div>
+
+    </div>
+    <!-- end modal dialog-->
+</div>
+</div>
+<!-- end modal-->
+
+
+<!-- App js -->
+<script th:src="@{/assets/js/app.min.js}"></script>
+<script th:src="@{/assets/js/commons/index.js}"></script>
+<script type="text/javascript">
+
+
+    let baseUrl = "/commonly/message/"
+
+    function uniquePhone() {
+
+        const phoneNumStr = document.getElementById("phoneNum").value
+        const phoneNumArr = phoneNumStr.split(',');
+        const str = unique(phoneNumArr)
+        document.getElementById("phoneNum").value = str
+    }
+
+    function show() {
+        $("#event-modal").modal("show");
+
+    }
+
+    function sendMessage() {
+        event.preventDefault()
+        debugger
+        $.ajax({
+            type: 'POST',
+            url: 'send/generalMessage',
+            data: $('#myFrom').serialize(),
+
+            success: function (response) {
+
+                debugger
+                alert(response.msg)
+
+            },
+
+        })
+
+    }
+
+
+    $('#phoneContent').bind('input propertychange', function () {
+
+        document.getElementById("textCount").innerHTML = $(this).val().length;
+        document.getElementById("Count").innerHTML = Math.ceil($(this).val().length / 70).toString();
+    });
+
+    function getCommonlyMessage(pageNum, pageSize) {
+        event.preventDefault()
+        window.location = baseUrl + "get?pageNum=" + pageNum + "&pageSize=" + pageSize
+    }
+
+    function changeShowTime() {
+        debugger
+        const selectElement = $("#sendTimeSelect option:selected").val()
+        if (selectElement == 3) {
+            $("#dingshi").attr("style", "display:block;");//显示div
+        } else {
+            $("#dingshi").attr("style", "display:none;");
+        }
+    }
+
+    function getCommonlyMessageModel(pageNum, pageSize) {
+        window.location = baseUrl + "?pageNum=" + pageNum + "&pageSize=" + pageSize
+
+    }
+
+    function clearPhone(id) {
+        document.getElementById(id).value = ""
+
+    }
+
+    const openFile = function (event) {
+        debugger
+        const input = event.target;
+        const reader = new FileReader();
+        reader.onload = function () {
+            if (reader.result) {
+                //显示文件内容
+                $("#phoneNum").html(reader.result);
+            }
+        };
+        reader.readAsText(input.files[0]);
+    };
+
+    function onclickText(prod) {
+        if (confirm("确定选择该默认短语吗？ ")) {
+            document.getElementById("phoneContent").innerText = prod.messagePushContent
+            $("#event-modal").modal("hide");
+        }
+
+    }
+</script>
+</body>
+
+</html>

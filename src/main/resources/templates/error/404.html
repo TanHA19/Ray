@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>商务短信平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
+
+    <!-- App css -->
+    <link th:href="@{/assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+
+<!-- Topbar Start -->
+<header th:replace="commons/index :: commonBar"></header>
+<!--Topbar end-->
+
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <header th:replace="commons/index :: commonHeader"></header>
+        <!-- Left Sidebar End -->
+        <div class="content-page">
+            <div class="content">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">首页</a></li>
+                                    <li class="breadcrumb-item active">404 Error</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">404 Error</h4>
+                        </div> <!-- end page-title-box -->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end page title -->
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="text-center">
+
+                            <h1 class="text-error mt-4">404</h1>
+                            <h4 class="text-uppercase text-danger mt-3">页面没有找到</h4>
+                            <p class="text-muted mt-3">功能正在开发中 。。。。。。 请持续关注</p>
+
+                            <a class="btn btn-info mt-3" th:href="@{/}"><i class="mdi mdi-reply"></i> 返回家目录</a>
+                        </div> <!-- end /.text-center-->
+                    </div> <!-- end col-->
+                </div>
+                <!-- end row -->
+
+            </div> <!-- content -->
+
+            <!-- Footer Start -->
+            <footer th:replace="commons/index :: commonFooter"></footer>
+            <!-- end Footer -->
+        </div> <!-- content-page -->
+
+    </div> <!-- end wrapper-->
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END Container -->
+
+
+<!-- App js -->
+<script th:src="@{/assets/js/app.min.js}"></script>
+
+</body>
+
+</html>

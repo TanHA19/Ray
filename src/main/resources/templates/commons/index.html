@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>商务短信平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
+
+    <!-- third party css -->
+    <link th:href="@{/assets/css/vendor/jquery-jvectormap-1.2.2.css}" rel="stylesheet" type="text/css"/>
+    <!-- third party css end -->
+
+    <!-- App css -->
+    <link th:href="@{/assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+
+<!-- Topbar Start -->
+<div class="navbar-custom topnav-navbar" th:fragment="commonBar">
+    <div class="container-fluid">
+        <!-- LOGO -->
+        <a class="topnav-logo"> <span class="topnav-logo-lg"> </span> <span class="topnav-logo-sm"> <img
+                th:href="@{/images/head/logo_sm.png}" alt="" height="16"/> </span> </a>
+        <ul class="list-unstyled topbar-right-menu float-right mb-0">
+            <li class="dropdown notification-list topbar-dropdown d-none d-lg-block"></li>
+            <li class="dropdown notification-list">
+                <a class="nav-link right-bar-toggle" href="javascript: void(0);">
+                    <i class="dripicons-gear noti-icon"></i>
+                </a>
+            </li>
+            <li class="dropdown notification-list"><a class="nav-link dropdown-toggle nav-user arrow-none mr-0"
+                                                      data-toggle="dropdown" id="topbar-userdrop" href="#" role="button"
+                                                      aria-haspopup="true" aria-expanded="false"> <span
+                    class="account-user-avatar">
+                                                    <img th:src="@{/assets/images/users/avatar-1.jpg}" alt="user-image"
+                                                         height="42" class="rounded-circle shadow-sm">
+
+                        </span> <span> <span id="username1" class="account-user-name"></span> <span id="role"
+                                                                                                    class="account-position"></span> </span>
+            </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
+                     aria-labelledby="topbar-userdrop">
+                    <!-- item -->
+                    <div class=" dropdown-header noti-title">
+                        <h6 class="text-overflow m-0">Welcome !</h6>
+                    </div>
+                    <!-- item  -->
+                    <a href="#" th:onclick="logout()" class="dropdown-item notify-item"> <i
+                            class="mdi mdi-account-arrow-right mr-1"></i> <span>退出</span> </a>
+                </div>
+            </li>
+        </ul>
+
+
+    </div>
+</div>
+<!-- end Topbar -->
+
+<!-- end Topbar -->
+
+
+<div class="container-fluid">
+
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <!-- Start Content-->
+        <header th:fragment="commonHeader">
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="left-side-menu" style="height: 93%">
+
+                <div class="leftbar-user">
+                    <a href="#">
+                        <img th:src="@{/assets/images/users/avatar-1.jpg}" alt="user-image" height="42"
+                             class="rounded-circle shadow-sm">
+                        <span class="leftbar-user-name" th:text="${session.userName}"></span>
+                    </a>
+                </div>
+
+                <!--- Sidemenu -->
+                <ul class="metismenu side-nav">
+
+                    <li class="side-nav-title side-nav-item">商务短信平台</li>
+
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class=" mdi mdi-comment-multiple"></i>
+                            <span class="badge badge-success float-right">3</span>
+                            <span> 短信发送 </span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a th:href="@{/toSendGeneral}">普通短信</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/toSendGeneral}">个性短信</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/toHighCapacity}">大容量短信</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="mdi mdi-dolby"></i>
+                            <span> 短信状态 </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-calendar.html">待发送</a>
+                            </li>
+                            <li class="side-nav-item">
+                                <a href="javascript: void(0);" aria-expanded="false">短信记录
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="side-nav-third-level" aria-expanded="false">
+                                    <li>
+                                        <a th:href="@{/operateLog/batch/get}">已发批次</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/operateLog/get}">已发明细</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+                    <li class="side-nav-item">
+                        <a href="widgets.html" class="side-nav-link">
+                            <i class="mdi mdi-amplifier"></i>
+                            <span class="badge badge-light float-right">New</span>
+                            <span> 收件箱 </span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="widgets.html" class="side-nav-link">
+                            <i class="dripicons-heart"></i>
+                            <span class="badge badge-light float-right">New</span>
+                            <span> 通讯录 </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class=" mdi mdi-account"></i>
+                            <span> 账户管理 </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a th:href="@{/user/get}">账户信息</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/accountAssets/get}">最近一条充值记录</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/order/get}">支付订单记录</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+                    <li class="side-nav-item" th:if="${#strings.equals(session.userId,session.admin)}">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="mdi mdi-contacts"></i>
+                            <span> 客户管理 </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a th:href="@{/user/white/get}">所有客户</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/user/black/get}">黑名单客户</a>
+                            </li>
+
+                            <li>
+                                <a href="charts-sparkline.html">移除客户</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="dripicons-list"></i>
+                            <span> 系统设置 </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a th:href="@{/sys/announcement/get}">系统公告</a>
+                            </li>
+
+                            <li>
+                                <a th:href="@{/commonly/message/get}">常用短语</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+
+                <!-- Help Box -->
+                <div class="help-box text-center" style="height: 24%;margin-top: 0%">
+                    <a href="javascript: void(0);" class="float-right close-btn text-body">
+                        <i class="mdi mdi-close"></i>
+                    </a>
+                    <img src="/assets/images/help-icon.svg" height="80" alt="Helper Icon Image"/>
+                    <h5 class="mt-3">商务短信发送平台</h5>
+                    <p class="mb-3" th:text="'热线电话:'+${session.adminUserPhone}"></p>
+
+                </div>
+                <!-- end Help Box -->
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+                <!-- Sidebar -left -->
+
+            </div>
+            <!-- Left Sidebar End -->
+        </header>
+        <div class="content-page">
+            <div class="content">
+
+
+                <div class="row">
+                    <div class="col-xl-5">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card widget-flat">
+                                    <div class="card-body">
+                                        <div class="float-right">
+                                            <i class="mdi mdi-account-multiple widget-icon"></i>
+                                        </div>
+                                        <h5 class="text-muted font-weight-normal mt-0" title="Number of Customers">
+                                            在线人数</h5>
+                                        <h3 class="mt-3 mb-3" th:text="${orderCount}"></h3>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
+                                            <span class="text-nowrap">趋势</span>
+                                        </p>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+
+                            <div class="col-lg-6">
+                                <div class="card widget-flat">
+                                    <div class="card-body">
+                                        <div class="float-right">
+                                            <i class="mdi mdi-cart-plus widget-icon"></i>
+                                        </div>
+                                        <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">
+                                            订单数</h5>
+                                        <h3 class="mt-3 mb-3" th:text="${orderCount}"></h3>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                                            <span class="text-nowrap">趋势</span>
+                                        </p>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+                        </div> <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card widget-flat">
+                                    <div class="card-body">
+                                        <div class="float-right">
+                                            <i class="mdi mdi-arrange-bring-forward"></i>
+                                        </div>
+                                        <h5 class="text-muted font-weight-normal mt-0" title="Average Revenue">
+                                            发送短信数</h5>
+                                        <h3 class="mt-3 mb-3" th:text="${messagesCount}"></h3>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
+                                            <span class="text-nowrap">趋势</span>
+                                        </p>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+
+                            <div class="col-lg-6">
+                                <div class="card widget-flat">
+                                    <div class="card-body">
+                                        <div class="float-right">
+                                            <i class="mdi mdi-blur-radial"></i>
+                                        </div>
+                                        <h5 class="text-muted font-weight-normal mt-0" title="Growth">平台影响率</h5>
+                                        <h3 class="mt-3 mb-3">+ 30.56%</h3>
+                                        <p class="mb-0 text-muted">
+                                            <span class="text-success mr-2">4.87%</span>
+                                            <span class="text-nowrap">趋势</span>
+                                        </p>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+                        </div> <!-- end row -->
+
+                    </div> <!-- end col -->
+
+                    <div class="col-xl-7">
+                        <div class="card">
+                            <div id="main1" style="height:355%;width: 100%"></div>
+                        </div> <!-- end card-->
+
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <div class="card">
+                    <div id="main" style="height:420%;width: 100%"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- end card-->
+    </div>
+    <!-- end col -->
+
+</div>
+<!-- end row -->
+
+</div> <!-- content -->
+
+<!-- Footer Start -->
+<footer class="footer" th:fragment="commonFooter">
+    <div class="row">
+        <div class="col-md-6">
+            2019 - 2020 © cnzy - tanjingjie.com
+        </div>
+        <div class="col-md-6">
+            <div class="text-md-right footer-links d-none d-md-block">
+                <a href="javascript: void(0);">关于我们</a>
+                <a href="javascript: void(0);">技术支持</a>
+                <a href="javascript: void(0);">联系我们</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end Footer -->
+</div> <!-- content-page -->
+
+</div> <!-- end wrapper-->
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+
+</div>
+<!-- END Container -->
+
+
+<!-- App js -->
+<script th:src="@{/assets/js/app.min.js}"></script>
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<!-- third party js -->
+<script src="https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min.js"></script>
+<script th:src="@{assets/js/vendor/jquery-jvectormap-1.2.2.min.js}"></script>
+<script th:src="@{assets/js/vendor/jquery-jvectormap-world-mill-en.js}"></script>
+<!-- third party js ends -->
+<script th:src="@{/assets/js/commons/index.js}"></script>
+<!-- demo app -->
+<script th:src="@{assets/js/pages/demo.dashboard.js}"></script>
+
+<!-- end demo js-->
+<script>
+    function logout() {
+        window.location = "/rayLogout"
+    }
+
+    let option = {
+        title:{
+            text: '业务订单趋势图',
+            subtext: '数据解释权归平台所有',
+            left: 'center'
+        },
+        xAxis: {
+            type: 'category',
+            name: '时间',
+            data: []
+        },
+        yAxis: {
+            type: 'value',
+            name: '总数',
+        },
+        series: [{
+            data: [],
+            type: 'line',
+            smooth: true
+        }]
+    };
+
+
+
+    let optionPie  = {
+        title: {
+            text: '发送状态统计',
+            subtext: '数据解释权归平台所有',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['发送成功', '发送失败', '响应失败', '返回失败']
+        },
+        series: [
+            {
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: [
+
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+
+
+
+    $(function () {
+        ajax("/analyse/week", {}, 'GET').then(function (res) {
+            debugger
+            if (res.success === true) {
+                debugger
+                const y = [];
+                const x = [];
+                res.data.lineStatistical.map(i => {
+                    y.push(i.y);
+                    x.push(i.x);
+                });
+
+                option.series[0].data = y;
+                option.xAxis.data = x;
+                let myChart = echarts.init(document.getElementById('main'));
+                myChart.setOption(option);
+
+                optionPie.series[0].data=(res.data.pieList);
+                let myChartPie = echarts.init(document.getElementById('main1'));
+                myChartPie.setOption(optionPie);
+
+            }
+        })
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.play.sms.ray.mapper.RayUserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.tan.play.sms.ray.entity.RayUserinfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="age" jdbcType="VARCHAR" property="age" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="loginname" jdbcType="VARCHAR" property="loginname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="clientpassword" jdbcType="VARCHAR" property="clientpassword" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="telnum" jdbcType="VARCHAR" property="telnum" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="points_total" jdbcType="INTEGER" property="pointsTotal" />
+    <result column="points_left" jdbcType="INTEGER" property="pointsLeft" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="updatedTime" jdbcType="VARCHAR" property="updatedtime" />
+    <result column="createdTime" jdbcType="VARCHAR" property="createdtime" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.play.sms.ray.mapper.RayUserExtendMapper">
+    <resultMap id="BaseResultMap" type="com.tan.play.sms.ray.entity.RayUserExtend">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="extend_id" jdbcType="INTEGER" property="extendId"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_birthday" jdbcType="VARCHAR" property="userBirthday"/>
+        <result column="user_level" jdbcType="INTEGER" property="userLevel"/>
+        <result column="user_address" jdbcType="VARCHAR" property="userAddress"/>
+        <result column="user_post_code" jdbcType="VARCHAR" property="userPostCode"/>
+        <result column="user_contact_name" jdbcType="VARCHAR" property="userContactName"/>
+        <result column="user_photo_url" jdbcType="VARCHAR" property="userPhotoUrl"/>
+        <result column="user_company_name" jdbcType="VARCHAR" property="userCompanyName"/>
+        <result column="user_reply_address" jdbcType="VARCHAR" property="userReplyAddress"/>
+        <result column="user_statu_address" jdbcType="VARCHAR" property="userStatuAddress"/>
+        <result column="user_userid" jdbcType="VARCHAR" property="userUserid"/>
+        <result column="user_ctime" jdbcType="VARCHAR" property="userCtime"/>
+        <result column="user_utime" jdbcType="VARCHAR" property="userUtime"/>
+    </resultMap>
+</mapper>

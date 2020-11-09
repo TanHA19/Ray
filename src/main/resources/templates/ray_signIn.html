@@ -1,0 +1,103 @@
+<!--[if IE]>
+<!DOCTYPE html><![endif]-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
+
+    <!-- App css -->
+    <link th:href="@{/assets/css/icons.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/assets/css/app.min.css}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="auth-fluid-pages pb-0">
+
+<div class="auth-fluid">
+    <!--Auth fluid left content -->
+    <div class="auth-fluid-form-box">
+        <div class="align-items-center d-flex h-100">
+            <div class="card-body">
+
+                <!-- Logo -->
+                <div class="auth-brand text-center text-lg-left">
+                    <a href="index.html">
+                        <span><img th:src="@{/assets/images/logo-light.png}" alt="" height="18"></span>
+                    </a>
+                </div>
+
+                <!-- title-->
+                <h4 class="mt-0">欢迎登录商务短信平台</h4>
+                <p class="text-muted mb-4">输入您的登录用户名和密码进入平台</p>
+
+                <!-- form -->
+                <form th:action="@{/authentication/from}" method="post">
+
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <input class="form-control" id="username" required="" placeholder="请输入登录昵称"
+                               name="username">
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="password">密码</label>
+                        <input class="form-control" type="password" required="" id="password"
+                               placeholder="请输入密码" name="password">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked
+                                   name="remember-me">
+                            <label class="custom-control-label" for="checkbox-signin">记住我</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-0 text-center">
+                        <button class="btn btn-primary" type="submit"> 登录</button>
+                    </div>
+                    <div class="form-group mb-1">
+                        <h4 th:text="${msg}" th:if="${not #strings.isEmpty(msg)}" style="color: red"></h4>
+                    </div>
+                </form>
+                <!-- end form-->
+
+                <!-- Footer-->
+                <footer class="footer footer-alt">
+                    <p class="text-muted">没有账号? <a th:href="@{/toRegister}" class="text-muted ml-1"><b>立刻注册</b></a></p>
+                </footer>
+
+            </div> <!-- end .card-body -->
+        </div> <!-- end .align-items-center.d-flex.h-100-->
+    </div>
+    <!-- end auth-fluid-form-box-->
+
+    <!-- Auth fluid right content -->
+    <div class="auth-fluid-right text-center">
+        <div class="auth-user-testimonial">
+            <h2 class="mb-3">Business SMS platform!</h2>
+            <p class="lead"><i class="mdi mdi-format-quote-open"></i> 让每一条短信都有价值
+                <i class="mdi mdi-format-quote-close"></i>
+            </p>
+            <p>
+                - Website author tan
+            </p>
+        </div> <!-- end auth-user-testimonial-->
+    </div>
+    <!-- end Auth fluid right content -->
+</div>
+<!-- end auth-fluid-->
+
+<!-- App js -->
+<script th:src="@{/assets/js/app.min.js}"></script>
+
+</body>
+
+</html>
